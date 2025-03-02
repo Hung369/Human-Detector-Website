@@ -168,4 +168,4 @@ python inference.py --input "your input .mp4 video path" --output "your output .
 
 ### Video Tracking Demo
 
-<iframe src="https://drive.google.com/file/d/1Wrng3WveRiYwx1IfuDTlkSA3L3L4Cwmv/preview" width="640" height="480" allow="autoplay"></iframe>
+[![View the video](https://via.placeholder.com/640x480.png?text=Click+to+view)](https://drive.google.com/file/d/1Wrng3WveRiYwx1IfuDTlkSA3L3L4Cwmv/preview)
