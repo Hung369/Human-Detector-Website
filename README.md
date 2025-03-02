@@ -18,7 +18,6 @@ This project is a web-based application that allows users to upload an image and
     - [Prerequisites](#prerequisites)
     - [Repository Clone](#repository-clone)
     - [Video Demo for WebApp](#video-demo-for-webapp)
-  - [](#)
   - [Training Human Detector](#training-human-detector)
     - [Setup Instructions](#setup-instructions)
     - [Data Preparation](#data-preparation)
