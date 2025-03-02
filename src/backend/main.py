@@ -49,7 +49,7 @@ class DetectionResultOut(BaseModel):
     image_path: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DetectionHistoryResponse(BaseModel):
     records: List[DetectionResultOut]
@@ -84,18 +84,14 @@ async def get_history(
     db: Session = Depends(get_db),
     skip: int = 0,
     limit: int = 10,
-    min_num_people: Optional[int] = None,
-    max_num_people: Optional[int] = None,
     start_time: Optional[str] = None,
     end_time: Optional[str] = None,
     search: Optional[str] = None
 ):
     query = db.query(DetectionResult)
     
-    if min_num_people is not None:
-        query = query.filter(DetectionResult.num_people >= min_num_people)
-    if max_num_people is not None:
-        query = query.filter(DetectionResult.num_people <= max_num_people)
+    if search:
+        query = query.filter(DetectionResult.image_path.contains(search))
 
     if start_time:
         try:

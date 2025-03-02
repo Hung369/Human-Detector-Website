@@ -5,14 +5,20 @@ export default function History() {
   const [records, setRecords] = useState([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
+  
+  // These are the active search parameters used in fetchHistory.
   const [search, setSearch] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
 
+  // These hold the input values for the search form.
+  const [searchInput, setSearchInput] = useState('')
+  const [startTimeInput, setStartTimeInput] = useState('')
+  const [endTimeInput, setEndTimeInput] = useState('')
+
   const fetchHistory = async (page, search, startTime, endTime) => {
     try {
       const skip = (page - 1) * 10;
-
       const params = { skip, limit: 10 };
       if (search.trim() !== '') params.search = search;
       if (startTime.trim() !== '') params.start_time = startTime;
@@ -26,14 +32,32 @@ export default function History() {
     }
   }
 
+  // useEffect will only trigger fetchHistory when the active search parameters change
   useEffect(() => {
     fetchHistory(page, search, startTime, endTime);
   }, [page, search, startTime, endTime]);
 
   const handleSearch = (e) => {
     e.preventDefault();
+    // Update the active search parameters only when the search button is pressed.
+    setSearch(searchInput);
+    setStartTime(startTimeInput);
+    setEndTime(endTimeInput);
     setPage(1);
-    fetchHistory(1, search, startTime, endTime);
+    // Optionally, trigger a fetch immediately:
+    fetchHistory(1, searchInput, startTimeInput, endTimeInput);
+  }
+
+  const handleReset = () => {
+    // Clear both the input fields and the active search parameters.
+    setSearchInput('');
+    setStartTimeInput('');
+    setEndTimeInput('');
+    setSearch('');
+    setStartTime('');
+    setEndTime('');
+    setPage(1);
+    fetchHistory(1, '', '', '');
   }
 
   return (
@@ -44,9 +68,9 @@ export default function History() {
         <div>
           <input 
             type="text" 
-            value={search} 
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by image path" 
+            value={searchInput} 
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search by image name" 
           />
         </div>
         <div style={{ marginTop: '10px' }}>
@@ -54,8 +78,8 @@ export default function History() {
             Start Date & Time: 
             <input 
               type="datetime-local"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
+              value={startTimeInput}
+              onChange={(e) => setStartTimeInput(e.target.value)}
             />
           </label>
         </div>
@@ -64,12 +88,17 @@ export default function History() {
             End Date & Time: 
             <input 
               type="datetime-local"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
+              value={endTimeInput}
+              onChange={(e) => setEndTimeInput(e.target.value)}
             />
           </label>
         </div>
-        <button type="submit" style={{ marginTop: '10px' }}>Search</button>
+        <div style={{ marginTop: '10px' }}>
+          <button type="submit">Search</button>
+          <button type="button" onClick={handleReset} style={{ marginLeft: '10px' }}>
+            Reset
+          </button>
+        </div>
       </form>
       <table border="1" cellPadding="10" style={{ marginTop: '20px' }}>
         <thead>
