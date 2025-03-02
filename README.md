@@ -25,6 +25,7 @@ This project is a web-based application that allows users to upload an image and
     - [Training](#training)
     - [Inference](#inference)
     - [Video Tracking Demo](#video-tracking-demo)
+  - [Author](#author)
 
 ---
 
@@ -169,3 +170,12 @@ python inference.py --input "your input .mp4 video path" --output "your output .
 ### Video Tracking Demo
 
 [![View the video](image/image.png?text=Click+to+view)](https://drive.google.com/file/d/1Wrng3WveRiYwx1IfuDTlkSA3L3L4Cwmv/preview)
+
+## Author
+
+**Nguyễn Mạnh Hùng**
+
+- **GitHub:** [@Hung369](https://github.com/Hung369)
+- **LinkedIn:** [Hùng Nguyễn Mạnh](https://www.linkedin.com/in/nguyenmhung-contact)
+
+If you have any questions, feedback, or suggestions, feel free to reach out at [nguyenmhung2310@gmail.com](mailto:nguyenmhung2310@gmail.com) or open an issue in this repository.
